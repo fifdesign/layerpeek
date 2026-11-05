@@ -193,7 +193,15 @@ def show_about(app):
     dlg.title("About – " + APP_NAME)
     dlg.transient(app)
     ui = app.ui
-    dlg.geometry("%dx%d" % (620 * ui, 640 * ui))
+    dlg.geometry("%dx%d" % (620 * ui, 720 * ui))
+    try:  # logo at the top
+        base = getattr(sys, "_MEIPASS", os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+        logo = Image.open(os.path.join(base, "assets", "layerpeek-logo.png")).resize(
+            (int(72 * ui), int(72 * ui)), Image.LANCZOS)
+        dlg._logo = ImageTk.PhotoImage(logo)
+        ttk.Label(dlg, image=dlg._logo).pack(pady=(int(10 * ui), 0))
+    except Exception:
+        pass
     frame = ttk.Frame(dlg, padding=int(8 * ui))
     frame.pack(fill="both", expand=True)
     txt = tk.Text(frame, wrap="word", relief="flat", padx=int(14 * ui), pady=int(10 * ui),
@@ -393,6 +401,11 @@ class App(TkinterDnD.Tk):
     def __init__(self, paths=()):
         super().__init__()
         self.title("%s %s" % (APP_NAME, APP_VERSION))
+        try:  # window + taskbar icon (works from source and from the PyInstaller exe)
+            base = getattr(sys, "_MEIPASS", os.path.join(os.path.dirname(os.path.abspath(__file__)), ".."))
+            self.iconbitmap(default=os.path.join(base, "assets", "layerpeek.ico"))
+        except Exception:
+            pass
         self.ui = max(1.0, self.winfo_fpixels("1i") / 96.0)  # UI scale factor
         self.geometry("%dx%d" % (1150 * self.ui, 760 * self.ui))
         ttk.Style().configure("Treeview", rowheight=int(22 * self.ui))

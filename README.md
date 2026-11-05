@@ -1,6 +1,6 @@
-# LayerPeek
+<p align="center"><img src="docs/banner.png" alt="LayerPeek: .procreate file reader for Windows"></p>
 
-**.procreate file reader for Windows.**
+**LayerPeek is a .procreate file reader for Windows.**
 
 Open Procreate artwork on a PC without an iPad or a Mac: look at the image, switch individual
 layers on and off, and export everything as a layered **PSD** or as transparent **PNG**s.
