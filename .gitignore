@@ -1,0 +1,16 @@
+# build output
+build/
+dist/
+*.spec
+__pycache__/
+*.pyc
+
+# exports and personal artwork: never commit these
+*.procreate
+*_export/
+*.psd
+
+# editors / OS
+.vscode/
+.idea/
+Thumbs.db
